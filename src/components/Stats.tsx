@@ -53,7 +53,7 @@ export default function Stats() {
           className="text-center space-y-8"
         >
           <p className="text-[11px] sm:text-xs font-bold text-slate-400 tracking-widest uppercase">
-            Trusted by <AnimatedCounter value="180+" /> plumbing companies across North America
+            Trusted by <AnimatedCounter value="180+" /> plumbing & HVAC companies across North America
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-8 items-center justify-center opacity-80 hover:opacity-100 transition-opacity">

@@ -60,7 +60,7 @@ export default function Hero({ onScrollToSection }: HeroProps) {
             {/* Exclusive badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs font-semibold tracking-wide uppercase">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Built exclusively for plumbing companies
+              Built exclusively for plumbing & HVAC companies
             </div>
 
             {/* Main Headings */}
@@ -73,7 +73,7 @@ export default function Hero({ onScrollToSection }: HeroProps) {
 
             {/* Supporting Copy */}
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
-              Performance marketing built exclusively for plumbing companies. Google Ads, Local SEO, and an automated follow-up system that turns raw calls into high-ticket revenue — not just vanity clicks.
+              Performance marketing built exclusively for plumbing & HVAC companies. Google Ads, Local SEO, and an automated follow-up system that turns raw calls into high-ticket revenue — not just vanity clicks.
             </p>
 
             {/* Call to Actions */}

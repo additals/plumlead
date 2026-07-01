@@ -89,7 +89,7 @@ export default function Footer({ onScrollToSection, onOpenAdmin }: FooterProps) 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-500">
           <p className="font-medium text-left">
-            &copy; {currentYear} PlumLead. Built exclusively for plumbing companies.
+            &copy; {currentYear} PlumLead. Built exclusively for plumbing & HVAC companies.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
