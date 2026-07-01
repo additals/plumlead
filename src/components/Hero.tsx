@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle, TrendingUp, Users, PhoneCall, Award } from 'lucide-react';
 import { motion } from 'motion/react';
 import AnimatedCounter from './AnimatedCounter';
+import heroImage from '../assets/images/plumbing_hvac_fleet_1782945307241.jpg';
 
 interface HeroProps {
   onScrollToSection: (sectionId: string) => void;
@@ -122,8 +123,8 @@ export default function Hero({ onScrollToSection }: HeroProps) {
               <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 p-3 overflow-hidden transform hover:scale-[1.01] transition-all duration-500">
                 <div className="relative aspect-[4/3] w-full bg-slate-100 rounded-2xl overflow-hidden shadow-inner">
                   <img
-                    src="/src/assets/images/plumbing_hero_1782942874276.jpg"
-                    alt="PlumLead Branded Plumbing Dispatch Fleet"
+                    src={heroImage}
+                    alt="PlumLead Branded Plumbing & HVAC Dispatch Fleet"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
