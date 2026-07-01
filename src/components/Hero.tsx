@@ -138,14 +138,14 @@ export default function Hero({ onScrollToSection }: HeroProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-8 -right-4 md:-right-8 bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 p-4 max-w-[280px] text-left space-y-3 transform rotate-1 hover:rotate-0 transition-all duration-300"
+                className="absolute bottom-[-24px] sm:-bottom-8 right-[-12px] sm:-right-8 bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 p-2.5 sm:p-4 w-[180px] sm:w-[260px] md:w-[280px] text-left space-y-2 sm:space-y-3 transform rotate-1 hover:rotate-0 transition-all duration-300"
               >
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live Campaign ROAS</p>
-                  <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium"><AnimatedCounter value={selectedROAS} /></span>
+                <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 sm:pb-2">
+                  <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live Campaign ROAS</p>
+                  <span className="text-[8px] sm:text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 sm:px-2 py-0.5 rounded-full font-medium"><AnimatedCounter value={selectedROAS} /></span>
                 </div>
                 {/* Small SVG graph */}
-                <div className="h-16 w-full pt-1">
+                <div className="h-10 sm:h-16 w-full pt-0.5 sm:pt-1">
                   <svg className="w-full h-full" viewBox="0 0 150 50" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="miniGrad" x1="0" y1="0" x2="0" y2="1">
@@ -167,9 +167,9 @@ export default function Hero({ onScrollToSection }: HeroProps) {
                     <circle cx="150" cy="5" r="3" fill="#10b981" stroke="#ffffff" strokeWidth="1" />
                   </svg>
                 </div>
-                <div className="flex items-center justify-between text-[10px] pt-1">
+                <div className="flex items-center justify-between text-[8px] sm:text-[10px] pt-0.5 sm:pt-1">
                   <span className="text-slate-400">Revenue Growth</span>
-                  <span className="text-emerald-400 font-extrabold"><AnimatedCounter value={selectedGrowth} /></span>
+                  <span className="text-emerald-400 font-extrabold text-[8px] sm:text-[10px]"><AnimatedCounter value={selectedGrowth} /></span>
                 </div>
               </motion.div>
 
@@ -178,19 +178,19 @@ export default function Hero({ onScrollToSection }: HeroProps) {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-10 -left-4 md:-left-8 bg-white border border-slate-100 rounded-2xl shadow-xl p-3.5 max-w-[240px] text-left space-y-2 transform -rotate-2 hover:rotate-0 transition-all duration-300"
+                className="absolute -top-6 sm:-top-10 -left-4 sm:-left-6 md:-left-8 bg-white border border-slate-100 rounded-2xl shadow-xl p-2 sm:p-3.5 w-[150px] sm:w-[220px] md:w-[240px] text-left space-y-1.5 sm:space-y-2 transform -rotate-2 hover:rotate-0 transition-all duration-300"
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Live Dispatched Call</p>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-blue-500 animate-ping animate-duration-1000" />
+                  <p className="text-[8px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">Live Dispatched Call</p>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[10px] text-blue-600 font-bold shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2.5">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[8px] sm:text-[10px] text-blue-600 font-bold shrink-0">
                     {selectedCall.name ? selectedCall.name[0] : 'D'}
                   </div>
-                  <div className="text-xs">
-                    <p className="font-extrabold text-slate-800">{selectedCall.name}</p>
-                    <p className="text-[10px] text-slate-400">{selectedCall.detail}</p>
+                  <div className="text-[9px] sm:text-xs">
+                    <p className="font-extrabold text-slate-800 leading-none mb-0.5">{selectedCall.name}</p>
+                    <p className="text-[8px] sm:text-[10px] text-slate-400 leading-none">{selectedCall.detail}</p>
                   </div>
                 </div>
               </motion.div>

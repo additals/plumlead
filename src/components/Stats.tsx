@@ -50,11 +50,15 @@ export default function Stats() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center space-y-8"
+          className="text-center space-y-4 mb-10"
         >
-          <p className="text-[11px] sm:text-xs font-bold text-slate-400 tracking-widest uppercase">
-            Trusted by <AnimatedCounter value="180+" /> plumbing & HVAC companies across North America
-          </p>
+          <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
+            Our Scale
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
+            Trusted by <span className="text-blue-600 bg-blue-50/50 px-3 py-1 rounded-2xl border border-blue-100/50 inline-block sm:inline"><AnimatedCounter value="180+" /></span> plumbing & HVAC companies across North America
+          </h2>
+        </motion.div>
           
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-8 items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
             {logos.map((logo, index) => (
@@ -78,7 +82,6 @@ export default function Stats() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
 
         {/* Stats Row */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mt-20 pt-8 border-t border-slate-100">

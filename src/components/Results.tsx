@@ -126,13 +126,13 @@ export default function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-left space-y-2 mb-8"
+          className="text-left space-y-3 mb-10 border-l-4 border-blue-600 pl-4 py-1"
         >
-          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 tracking-tight">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 tracking-tight">
             Live territory success stories
           </h3>
-          <p className="text-sm text-slate-500">
-            Real plumbers. Real revenue. Fully verified dispatch metrics.
+          <p className="text-sm sm:text-base text-slate-500 font-medium">
+            Real plumbing & HVAC business owners. Fully verified live dispatch metrics and revenue.
           </p>
         </motion.div>
 
@@ -161,9 +161,14 @@ export default function Results() {
                 </div>
 
                 <div className="space-y-1.5 text-left">
-                  <h4 className="text-lg sm:text-xl font-extrabold text-slate-950">
-                    {study.company}
-                  </h4>
+                  <div className="flex items-center gap-1.5">
+                    <h4 className="text-lg sm:text-xl font-extrabold text-slate-950">
+                      {study.company}
+                    </h4>
+                    <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-500 text-white shadow-sm flex-shrink-0" title="Verified Business">
+                      <Check className="w-2.5 h-2.5 stroke-[4.5]" />
+                    </span>
+                  </div>
                   <p className="text-xs font-bold text-slate-400 font-mono">
                     {study.location}
                   </p>
