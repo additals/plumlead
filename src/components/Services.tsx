@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, MapPin, Laptop, PhoneCall, MessageSquare, Award, ArrowUpRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface ServicesProps {
   onScrollToSection: (sectionId: string) => void;
@@ -46,11 +47,17 @@ export default function Services({ onScrollToSection }: ServicesProps) {
   ];
 
   return (
-    <section id="services" className="bg-white py-20 border-b border-slate-100">
+    <section id="services" className="bg-white py-20 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <span className="text-xs font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3.5 py-1.5 rounded-full">
             What We Do
           </span>
@@ -60,13 +67,17 @@ export default function Services({ onScrollToSection }: ServicesProps) {
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             Every marketing channel we operate is fully dialed in for one industry and one industry only. No generic campaigns, no juggling 12 different niches.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Bento Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesList.map((service) => (
-            <div
+          {servicesList.map((service, index) => (
+            <motion.div
               key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 space-y-5 text-left shadow-sm hover:shadow-xl hover:border-blue-500/20 hover:scale-[1.02] transition-all duration-300 group relative flex flex-col justify-between"
               id={`service-card-${service.id}`}
             >
@@ -92,12 +103,18 @@ export default function Services({ onScrollToSection }: ServicesProps) {
                 <span>Request details</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Bottom banner callout */}
-        <div className="mt-16 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-16 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6"
+        >
           <div className="text-left space-y-1">
             <h4 className="font-bold text-slate-950 text-base sm:text-lg">Need a customized marketing blueprint for your plumbing territory?</h4>
             <p className="text-xs sm:text-sm text-slate-500">We will analyze your competitors, local keyword volume, and estimate your monthly booked jobs.</p>
@@ -108,7 +125,7 @@ export default function Services({ onScrollToSection }: ServicesProps) {
           >
             Claim Your Free Territory Analysis
           </button>
-        </div>
+        </motion.div>
 
       </div>
     </section>

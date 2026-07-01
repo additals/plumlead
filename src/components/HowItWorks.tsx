@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Rocket, PhoneCall, CheckCircle, TrendingUp } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function HowItWorks() {
   const steps = [
@@ -44,7 +45,13 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-4 mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-2xl mx-auto space-y-4 mb-20"
+        >
           <span className="text-xs font-black text-blue-400 uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full">
             How It Works
           </span>
@@ -54,7 +61,7 @@ export default function HowItWorks() {
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
             We don’t do complicated onboarding. We focus strictly on deploying a high-speed plumbing booking system that begins generating cash in weeks, not quarters.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Horizontal / Vertical Grid */}
         <div className="grid md:grid-cols-5 gap-6 relative">
@@ -63,8 +70,12 @@ export default function HowItWorks() {
           <div className="hidden md:block absolute top-[28px] left-[5%] right-[5%] h-0.5 bg-gradient-to-r from-blue-500/30 via-teal-500/30 to-amber-500/30 -z-0" />
 
           {steps.map((step, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-6 relative flex flex-col justify-between hover:border-slate-700/80 hover:bg-slate-900 transition-all duration-300 group z-10 text-left"
               id={`step-card-${step.number}`}
             >
@@ -102,7 +113,7 @@ export default function HowItWorks() {
                   Phase {idx + 1}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

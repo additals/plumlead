@@ -1,17 +1,42 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle, TrendingUp, Users, PhoneCall, Award } from 'lucide-react';
+import { motion } from 'motion/react';
+import AnimatedCounter from './AnimatedCounter';
 
 interface HeroProps {
   onScrollToSection: (sectionId: string) => void;
 }
 
 export default function Hero({ onScrollToSection }: HeroProps) {
-  // Sample dynamic metrics for the mock dashboard
-  const activeLeads = [
-    { name: 'Dave S. (Phoenix)', type: 'Emergency Water Heater replacement', value: '$2,850', time: '10m ago' },
-    { name: 'Robert K. (Dallas)', type: 'Main Sewer Line Clear', value: '$1,200', time: '1h ago' },
-    { name: 'Linda M. (Tampa)', type: 'Commercial Pipe Leak Repair', value: '$4,100', time: '3h ago' },
-  ];
+  const [selectedCall, setSelectedCall] = React.useState({ name: 'Dave S. (Phoenix)', detail: 'Emergency Leak repair booked!' });
+  const [selectedROAS, setSelectedROAS] = React.useState('11.4x Avg');
+  const [selectedGrowth, setSelectedGrowth] = React.useState('+312%');
+
+  React.useEffect(() => {
+    const calls = [
+      { name: 'Dave S. (Phoenix)', detail: 'Emergency Leak repair booked!' },
+      { name: 'Robert K. (Dallas)', detail: 'Tankless Water Heater Upgrade booked!' },
+      { name: 'Linda M. (Tampa)', detail: 'Main Sewer Line Clear booked!' },
+      { name: 'Michael G. (Denver)', detail: 'Commercial Pipe Leak Repair booked!' },
+      { name: 'Patricia R. (Charlotte)', detail: 'Whole-house Repiping booked!' },
+      { name: 'Steven T. (Chicago)', detail: 'Sump Pump Emergency installation booked!' },
+      { name: 'Amanda J. (Miami)', detail: 'Emergency Burst Pipe fix booked!' },
+      { name: 'James P. (Atlanta)', detail: 'Hydro-jetting Drain Service booked!' },
+      { name: 'Charles W. (Austin)', detail: 'Slab Leak Detection & repair booked!' },
+      { name: 'Thomas H. (Las Vegas)', detail: 'Commercial Drain Snaking booked!' },
+      { name: 'Sarah E. (Orlando)', detail: 'Emergency Backflow Prevention test booked!' },
+    ];
+    const roasOptions = ['11.4x Avg', '10.8x Avg', '12.1x Avg', '9.8x Avg', '13.2x Avg', '11.9x Avg', '10.5x Avg', '14.1x Avg'];
+    const growthOptions = ['+312%', '+284%', '+345%', '+290%', '+368%', '+327%', '+305%', '+385%'];
+
+    const randomCall = calls[Math.floor(Math.random() * calls.length)];
+    const randomRoas = roasOptions[Math.floor(Math.random() * roasOptions.length)];
+    const randomGrowth = growthOptions[Math.floor(Math.random() * growthOptions.length)];
+
+    setSelectedCall(randomCall);
+    setSelectedROAS(randomRoas);
+    setSelectedGrowth(randomGrowth);
+  }, []);
 
   return (
     <section
@@ -26,7 +51,12 @@ export default function Hero({ onScrollToSection }: HeroProps) {
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column - Headline & Pitch */}
-          <div className="lg:col-span-7 space-y-6 md:space-y-8 text-left">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-6 md:space-y-8 text-left"
+          >
             {/* Exclusive badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs font-semibold tracking-wide uppercase">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -77,161 +107,94 @@ export default function Hero({ onScrollToSection }: HeroProps) {
                 <span>ROI-tracked reporting</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column - Premium Dashboard Mockup */}
-          <div className="lg:col-span-5 relative">
+          {/* Right Column - Premium Branded Fleet & Live Telemetry Overlay */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative mt-6 lg:mt-0"
+          >
             <div className="relative mx-auto max-w-[480px] lg:max-w-none">
               
-              {/* Dashboard Container with Browser Frame */}
-              <div className="bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
-                {/* Browser top-bar */}
-                <div className="bg-slate-950 px-4 py-3 flex items-center justify-between border-b border-slate-800/80">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-3 rounded-full bg-rose-500/80 block" />
-                    <span className="w-3 h-3 rounded-full bg-amber-500/80 block" />
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 block" />
-                  </div>
-                  <span className="text-[11px] font-mono text-slate-500 font-medium">plumlead-client-portal.app</span>
-                  <div className="w-10" />
-                </div>
-
-                {/* Dashboard Inner */}
-                <div className="p-5 space-y-4 text-slate-100">
-                  
-                  {/* Top Stats Cards Group */}
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
-                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total Calls</p>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-lg font-bold text-white">184</span>
-                        <span className="text-[9px] text-emerald-400 font-semibold">+22%</span>
-                      </div>
-                    </div>
-                    <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
-                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Booked Jobs</p>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-lg font-bold text-blue-400">114</span>
-                        <span className="text-[9px] text-emerald-400 font-semibold">+35%</span>
-                      </div>
-                    </div>
-                    <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
-                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Ad ROAS</p>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-lg font-bold text-emerald-400">11.4x</span>
-                        <span className="text-[9px] text-slate-400">Avg</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* SVG Line Chart representing Conversion growth */}
-                  <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs font-semibold text-slate-300">Revenue From Marketing Campaigns</p>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">Live Feed</span>
-                    </div>
-                    
-                    {/* Beautiful SVG graph */}
-                    <div className="h-28 w-full pt-1">
-                      <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
-                        <defs>
-                          <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#2563eb" stopOpacity="0.4" />
-                            <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
-                          </linearGradient>
-                        </defs>
-                        {/* Grid lines */}
-                        <line x1="0" y1="20" x2="300" y2="20" stroke="#334155" strokeWidth="0.5" strokeDasharray="4" />
-                        <line x1="0" y1="50" x2="300" y2="50" stroke="#334155" strokeWidth="0.5" strokeDasharray="4" />
-                        <line x1="0" y1="80" x2="300" y2="80" stroke="#334155" strokeWidth="0.5" strokeDasharray="4" />
-                        
-                        {/* Area path */}
-                        <path
-                          d="M 0 90 Q 50 85, 80 65 T 150 45 T 220 25 T 300 10 L 300 100 L 0 100 Z"
-                          fill="url(#chartGrad)"
-                        />
-                        {/* Line path */}
-                        <path
-                          d="M 0 90 Q 50 85, 80 65 T 150 45 T 220 25 T 300 10"
-                          fill="none"
-                          stroke="#3b82f6"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                        />
-                        {/* Dynamic dots */}
-                        <circle cx="80" cy="65" r="4" fill="#3b82f6" stroke="#ffffff" strokeWidth="1" />
-                        <circle cx="220" cy="25" r="4" fill="#3b82f6" stroke="#ffffff" strokeWidth="1" />
-                        <circle cx="300" cy="10" r="4" fill="#10b981" stroke="#ffffff" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <div className="flex justify-between text-[9px] text-slate-500 font-mono pt-1">
-                      <span>Month 1</span>
-                      <span>Month 2</span>
-                      <span>Month 3 (PlumLead Active)</span>
-                    </div>
-                  </div>
-
-                  {/* Active Job Leads Feed */}
-                  <div className="space-y-2">
-                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Recent Dispatched Calls</p>
-                    <div className="space-y-1.5">
-                      {activeLeads.map((lead, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-slate-950/50 hover:bg-slate-950/80 px-3 py-2.5 rounded-lg border border-slate-800/60 flex items-center justify-between text-xs transition-all"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-7 h-7 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-[10px] text-blue-400 font-bold">
-                              {lead.name[0]}
-                            </div>
-                            <div className="text-left">
-                              <p className="font-semibold text-slate-200">{lead.name}</p>
-                              <p className="text-[10px] text-slate-400 line-clamp-1">{lead.type}</p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-bold text-emerald-400">{lead.value}</p>
-                            <p className="text-[9px] text-slate-500">{lead.time}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
+              {/* Primary: Beautiful Real-World Fleet Image Card */}
+              <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 p-3 overflow-hidden transform hover:scale-[1.01] transition-all duration-500">
+                <div className="relative aspect-[4/3] w-full bg-slate-100 rounded-2xl overflow-hidden shadow-inner">
+                  <img
+                    src="/src/assets/images/plumbing_hero_1782942874276.jpg"
+                    alt="PlumLead Branded Plumbing Dispatch Fleet"
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* Subtle vignette/gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                 </div>
               </div>
 
-              {/* +312% Float Capsule Widget */}
-              <div className="absolute -bottom-6 -left-6 md:-left-8 bg-white border border-slate-100 rounded-2xl shadow-xl p-4 flex items-center gap-3.5 transform -rotate-2 hover:rotate-0 transition-transform duration-300 max-w-[240px]">
-                <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 shadow-inner">
-                  <TrendingUp className="w-6 h-6" />
+              {/* Floating Element 1: Digital Dashboard Overlap (Bottom Right) */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -bottom-8 -right-4 md:-right-8 bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 p-4 max-w-[280px] text-left space-y-3 transform rotate-1 hover:rotate-0 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live Campaign ROAS</p>
+                  <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium"><AnimatedCounter value={selectedROAS} /></span>
                 </div>
-                <div className="text-left">
-                  <span className="text-xl font-black text-slate-900 leading-none tracking-tight block">
-                    +312%
-                  </span>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mt-0.5">
-                    Booked Jobs In 90 Days
-                  </span>
+                {/* Small SVG graph */}
+                <div className="h-16 w-full pt-1">
+                  <svg className="w-full h-full" viewBox="0 0 150 50" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="miniGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M 0 45 Q 25 40, 40 30 T 75 20 T 110 10 T 150 5 L 150 50 L 0 50 Z"
+                      fill="url(#miniGrad)"
+                    />
+                    <path
+                      d="M 0 45 Q 25 40, 40 30 T 75 20 T 110 10 T 150 5"
+                      fill="none"
+                      stroke="#3b82f6"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="150" cy="5" r="3" fill="#10b981" stroke="#ffffff" strokeWidth="1" />
+                  </svg>
                 </div>
-              </div>
+                <div className="flex items-center justify-between text-[10px] pt-1">
+                  <span className="text-slate-400">Revenue Growth</span>
+                  <span className="text-emerald-400 font-extrabold"><AnimatedCounter value={selectedGrowth} /></span>
+                </div>
+              </motion.div>
 
-              {/* Verification/Rating float badge */}
-              <div className="absolute -top-6 -right-6 bg-white border border-slate-100 rounded-2xl shadow-xl p-3 flex items-center gap-2.5 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                <div className="flex text-amber-400">
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+              {/* Floating Element 2: Dispatched Calls Overlap (Top Left) */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -top-10 -left-4 md:-left-8 bg-white border border-slate-100 rounded-2xl shadow-xl p-3.5 max-w-[240px] text-left space-y-2 transform -rotate-2 hover:rotate-0 transition-all duration-300"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Live Dispatched Call</p>
                 </div>
-                <div className="text-[10px] font-bold text-slate-700 tracking-tight uppercase">
-                  4.9 Rating (180+ Plumbers)
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[10px] text-blue-600 font-bold shrink-0">
+                    {selectedCall.name ? selectedCall.name[0] : 'D'}
+                  </div>
+                  <div className="text-xs">
+                    <p className="font-extrabold text-slate-800">{selectedCall.name}</p>
+                    <p className="text-[10px] text-slate-400">{selectedCall.detail}</p>
+                  </div>
                 </div>
-              </div>
-
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

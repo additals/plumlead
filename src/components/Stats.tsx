@@ -1,5 +1,7 @@
 import React from 'react';
 import { Award, Users, BarChart3, TrendingUp } from 'lucide-react';
+import { motion } from 'motion/react';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function Stats() {
   const logos = [
@@ -39,19 +41,29 @@ export default function Stats() {
   ];
 
   return (
-    <section id="stats-section" className="bg-white border-y border-slate-100 py-16">
+    <section id="stats-section" className="bg-white border-y border-slate-100 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Logos Cloud Header */}
-        <div className="text-center space-y-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center space-y-8"
+        >
           <p className="text-[11px] sm:text-xs font-bold text-slate-400 tracking-widest uppercase">
-            Trusted by 180+ plumbing companies across North America
+            Trusted by <AnimatedCounter value="180+" /> plumbing companies across North America
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-8 items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
             {logos.map((logo, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col items-center justify-center p-3 rounded-xl border border-dashed border-slate-200/60 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-1.5">
@@ -63,16 +75,20 @@ export default function Stats() {
                 <span className="text-[9px] font-mono text-slate-400 mt-1 uppercase tracking-wider">
                   {logo.desc}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats Row */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mt-20 pt-8 border-t border-slate-100">
           {statItems.map((item, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-center space-y-2.5 group hover:scale-[1.01] transition-transform"
               id={`stat-card-${index}`}
             >
@@ -80,7 +96,7 @@ export default function Stats() {
                 {item.icon}
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                {item.value}
+                <AnimatedCounter value={item.value} />
               </h3>
               <div className="space-y-1">
                 <p className="text-sm sm:text-base font-bold text-slate-700 leading-snug">
@@ -90,7 +106,7 @@ export default function Stats() {
                   {item.subtext}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

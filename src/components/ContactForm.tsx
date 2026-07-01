@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle2, CalendarDays, ArrowRight, Loader2, Award, Phone, Compass } from 'lucide-react';
 import { Lead, IntegrationSettings } from '../types';
+import { motion } from 'motion/react';
 
 interface ContactFormProps {
   onLeadSubmitted: (lead: Lead) => void;
@@ -139,7 +140,13 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
         <div className="grid lg:grid-cols-12 gap-12 items-stretch">
           
           {/* Left Side: Solid Blue Info Box */}
-          <div className="lg:col-span-5 bg-blue-600 rounded-3xl p-8 sm:p-12 text-white flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-blue-600/10">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 bg-blue-600 rounded-3xl p-8 sm:p-12 text-white flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-blue-600/10"
+          >
             {/* Soft decorative glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500 rounded-full blur-3xl -z-10 opacity-30" />
             
@@ -188,10 +195,16 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
                 <p className="text-xs text-blue-100">Once you book your territory, we block out your competitors.</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side: Lead Capture Form Card */}
-          <div className="lg:col-span-7 bg-white border border-slate-100 shadow-2xl rounded-3xl p-6 sm:p-10 relative flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 bg-white border border-slate-100 shadow-2xl rounded-3xl p-6 sm:p-10 relative flex flex-col justify-center"
+          >
             
             {!isSuccess ? (
               <form onSubmit={handleSubmit} className="space-y-6 text-left" id="lead-booking-form">
@@ -388,7 +401,7 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
               </div>
             )}
 
-          </div>
+          </motion.div>
 
         </div>
       </div>

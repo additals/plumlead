@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function HardTruth() {
   const points = [
@@ -30,11 +31,17 @@ export default function HardTruth() {
   ];
 
   return (
-    <section id="about" className="bg-slate-50/40 py-20 border-b border-slate-100">
+    <section id="about" className="bg-slate-50/40 py-20 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
             The Hard Truth
           </span>
@@ -44,13 +51,17 @@ export default function HardTruth() {
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             Clicks don't pay your technicians or buy trucks. Booked jobs do. Most generalist marketing agencies optimize for vanity metrics that look great on a monthly PDF report — but never make your phone ring.
           </p>
-        </div>
+        </motion.div>
 
         {/* Comparison Cards Grid */}
         <div className="grid md:grid-cols-3 gap-8">
-          {points.map((point) => (
-            <div
+          {points.map((point, index) => (
+            <motion.div
               key={point.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-slate-200 transition-all duration-300"
               id={`truth-card-${point.id}`}
             >
@@ -82,7 +93,7 @@ export default function HardTruth() {
               <div className="bg-slate-50 px-6 py-5 border-t border-slate-100 text-xs sm:text-sm text-slate-500 leading-relaxed">
                 {point.description}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

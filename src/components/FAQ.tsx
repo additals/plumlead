@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function FAQ() {
   const [openId, setOpenId] = useState<number | null>(0); // First one open by default
@@ -42,11 +43,17 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-slate-50/30 py-20 border-b border-slate-100">
+    <section id="faq" className="bg-slate-50/30 py-20 border-b border-slate-100 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-2xl mx-auto space-y-4 mb-16"
+        >
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
             FAQ
           </span>
@@ -56,15 +63,19 @@ export default function FAQ() {
           <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
             Everything you need to know about our specialized plumbing growth platform, contracts, and software integrations.
           </p>
-        </div>
+        </motion.div>
 
         {/* Accordion List */}
         <div className="space-y-4">
-          {faqItems.map((item) => {
+          {faqItems.map((item, index) => {
             const isOpen = openId === item.id;
             return (
-              <div
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 className={`bg-white rounded-2xl border transition-all duration-300 ${
                   isOpen
                     ? 'border-blue-500 shadow-md ring-1 ring-blue-500/10'
@@ -100,7 +111,7 @@ export default function FAQ() {
                     {item.answer}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

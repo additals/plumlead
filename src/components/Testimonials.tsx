@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function Testimonials() {
   const reviews = [
@@ -33,11 +34,17 @@ export default function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="bg-white py-20 border-b border-slate-100">
+    <section id="testimonials" className="bg-white py-20 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
             What Clients Say
           </span>
@@ -47,13 +54,17 @@ export default function Testimonials() {
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             See how real local business owners scaled their operations, cleared out scheduling gaps, and built predictable revenue pipelines.
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-8">
-          {reviews.map((review) => (
-            <div
+          {reviews.map((review, index) => (
+            <motion.div
               key={review.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="bg-slate-50/60 rounded-2xl border border-slate-100/80 p-6 sm:p-8 flex flex-col justify-between hover:bg-slate-50 hover:border-slate-200 hover:scale-[1.01] transition-all duration-300"
               id={`testimonial-card-${review.id}`}
             >
@@ -85,7 +96,7 @@ export default function Testimonials() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

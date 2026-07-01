@@ -1,5 +1,7 @@
 import React from 'react';
 import { PhoneCall, BarChart3, TrendingUp, Users, Check, ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function Results() {
   const resultStats = [
@@ -66,11 +68,17 @@ export default function Results() {
   ];
 
   return (
-    <section id="results" className="bg-slate-50/50 py-20 border-b border-slate-100">
+    <section id="results" className="bg-slate-50/50 py-20 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
             Real Results
           </span>
@@ -80,13 +88,17 @@ export default function Results() {
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             We hold ourselves accountable to the metrics that matter. Here is how we grow local plumbing firms into market leaders.
           </p>
-        </div>
+        </motion.div>
 
         {/* Top 4-Column Stats Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {resultStats.map((stat, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow"
               id={`result-stat-${idx}`}
             >
@@ -95,7 +107,7 @@ export default function Results() {
               </div>
               <div className="text-left space-y-1">
                 <p className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
-                  {stat.value}
+                  <AnimatedCounter value={stat.value} />
                 </p>
                 <p className="text-sm font-bold text-slate-700">
                   {stat.label}
@@ -104,25 +116,35 @@ export default function Results() {
                   {stat.sub}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Case Studies Header */}
-        <div className="text-left space-y-2 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-left space-y-2 mb-8"
+        >
           <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 tracking-tight">
             Live territory success stories
           </h3>
           <p className="text-sm text-slate-500">
             Real plumbers. Real revenue. Fully verified dispatch metrics.
           </p>
-        </div>
+        </motion.div>
 
         {/* Case Studies Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
           {caseStudies.map((study, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-lg hover:border-blue-500/10 transition-all duration-300 relative group overflow-hidden"
               id={`case-study-card-${idx}`}
             >
@@ -161,12 +183,12 @@ export default function Results() {
                       {s.label}
                     </p>
                     <p className="text-lg sm:text-xl font-black text-slate-900 leading-none">
-                      {s.value}
+                      <AnimatedCounter value={s.value} />
                     </p>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
