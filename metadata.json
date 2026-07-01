@@ -1,0 +1,6 @@
+{
+  "name": "PlumLead",
+  "description": "Premium performance marketing agency website for plumbing companies, featuring lead tracking, results display, and interactive strategy session booking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
