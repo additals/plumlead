@@ -1,0 +1,101 @@
+<svg
+  viewBox="0 0 512 512"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background rounded square -->
+  <rect
+    width="512"
+    height="512"
+    rx="112"
+    fill="#1e5bfb"
+  />
+  
+  <!-- White Plumbing Pipe 'P' -->
+  <!-- Left Vertical Stem -->
+  <path
+    d="M 165 260 L 165 390"
+    stroke="white"
+    strokeWidth="44"
+    strokeLinecap="butt"
+  />
+  <!-- Bottom flange -->
+  <rect
+    x="135"
+    y="380"
+    width="60"
+    height="18"
+    rx="5"
+    fill="white"
+  />
+  
+  <!-- Top-Left curve to Top-Middle -->
+  <path
+    d="M 165 260 L 165 190 C 165 140 210 115 250 115"
+    stroke="white"
+    strokeWidth="44"
+    fill="none"
+    strokeLinecap="butt"
+  />
+  <!-- Top-middle vertical flange -->
+  <rect
+    x="241"
+    y="93"
+    width="18"
+    height="44"
+    rx="5"
+    fill="white"
+  />
+  
+  <!-- Top-Middle to Right Loop & middle flange -->
+  <path
+    d="M 250 115 C 320 115 355 160 355 220 L 355 240"
+    stroke="white"
+    strokeWidth="44"
+    fill="none"
+    strokeLinecap="butt"
+  />
+  <!-- Right middle horizontal flange -->
+  <rect
+    x="333"
+    y="231"
+    width="44"
+    height="18"
+    rx="5"
+    fill="white"
+  />
+  
+  <!-- Right Loop returning to the Stem -->
+  <path
+    d="M 355 240 C 355 300 310 310 240 310 L 165 310"
+    stroke="white"
+    strokeWidth="44"
+    fill="none"
+    strokeLinecap="butt"
+  />
+  <!-- Bottom curve vertical flange -->
+  <rect
+    x="231"
+    y="288"
+    width="18"
+    height="44"
+    rx="5"
+    fill="white"
+  />
+
+  <!-- Growth Trend Arrow -->
+  <!-- Arrow path -->
+  <path
+    d="M 115 385 L 235 265 L 275 305 L 415 135"
+    stroke="white"
+    strokeWidth="32"
+    strokeLinecap="square"
+    strokeLinejoin="miter"
+    fill="none"
+  />
+  <!-- Arrowhead -->
+  <polygon
+    points="415,135 325,185 355,195 365,225"
+    fill="white"
+  />
+</svg>

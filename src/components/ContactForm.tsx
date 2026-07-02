@@ -30,65 +30,6 @@ const getCalendlyRedirectUrl = (lead: Lead, settings: IntegrationSettings) => {
   return `${cleanBase}?${params.toString()}`;
 };
 
-const validatePlumbingEmail = (email: string) => {
-  const trimmed = email.trim().toLowerCase();
-  if (!trimmed) {
-    return { isValid: false, message: 'Email address is required', type: 'error' as const };
-  }
-
-  // Basic email layout validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(trimmed)) {
-    return { isValid: false, message: 'Please enter a valid email format', type: 'error' as const };
-  }
-
-  const parts = trimmed.split('@');
-  if (parts.length !== 2) {
-    return { isValid: false, message: 'Invalid email structure', type: 'error' as const };
-  }
-
-  const localPart = parts[0];
-  const domain = parts[1];
-
-  const genericDomains = [
-    'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 
-    'icloud.com', 'msn.com', 'live.com', 'comcast.net', 'sbcglobal.net', 
-    'bellsouth.net', 'verizon.net', 'cox.net', 'charter.net', 'earthlink.net', 
-    'mail.com', 'gmx.com', 'zoho.com', 'proton.me', 'protonmail.com', 'ymail.com'
-  ];
-
-  const plumbingKeywords = [
-    'plumb', 'hvac', 'drain', 'sewer', 'pipe', 'heat', 'air', 'mechanical', 
-    'service', 'ac', 'comfort', 'flow', 'water', 'vent', 'duct', 'leak', 
-    'rooter', 'clog', 'boiler', 'pump', 'gas', 'cooling', 'climate', 'wire', 
-    'electric', 'spark', 'tech', 'dispatch', 'backflow'
-  ];
-
-  const isGeneric = genericDomains.includes(domain);
-
-  if (isGeneric) {
-    const hasKeyword = plumbingKeywords.some(keyword => localPart.includes(keyword));
-    if (!hasKeyword) {
-      return {
-        isValid: false,
-        message: 'Personal email detected. Use a company domain or business-named email (e.g., acmeplumbing@gmail.com).',
-        type: 'warning' as const
-      };
-    }
-    return {
-      isValid: true,
-      message: 'Verified plumbing business email format.',
-      type: 'success' as const
-    };
-  }
-
-  return {
-    isValid: true,
-    message: 'Valid company email domain verified.',
-    type: 'success' as const
-  };
-};
-
 export default function ContactForm({ onLeadSubmitted, settings }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
@@ -103,19 +44,15 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
   const [isSuccess, setIsSuccess] = useState(false);
   const [submittedLead, setSubmittedLead] = useState<Lead | null>(null);
   const [countdown, setCountdown] = useState<number | null>(null);
-  const [emailValidation, setEmailValidation] = useState<{
-    isValid: boolean;
-    message: string;
-    type: 'idle' | 'success' | 'warning' | 'error';
-  }>({ isValid: false, message: '', type: 'idle' });
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = 'Full name is required';
     
-    const emailCheck = validatePlumbingEmail(formData.email);
-    if (!emailCheck.isValid) {
-      newErrors.email = emailCheck.message;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address';
     }
 
     if (!formData.phone.trim()) {
@@ -130,28 +67,14 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
-    if (name === 'email') {
-      const emailCheck = validatePlumbingEmail(value);
-      setEmailValidation(emailCheck);
-      if (errors.email) {
-        setErrors((prev) => ({ ...prev, email: '' }));
-      }
-    } else {
-      if (errors[name]) {
-        setErrors((prev) => ({ ...prev, [name]: '' }));
-      }
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) {
-      // Force email check status to update so user knows why
-      const emailCheck = validatePlumbingEmail(formData.email);
-      setEmailValidation(emailCheck);
-      return;
-    }
+    if (!validate()) return;
 
     setIsSubmitting(true);
 
@@ -203,7 +126,6 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
         company: '',
         goals: '',
       });
-      setEmailValidation({ isValid: false, message: '', type: 'idle' });
 
       // No longer redirecting to Calendly - showing success state directly
       setCountdown(null);
@@ -331,37 +253,13 @@ export default function ContactForm({ onLeadSubmitted, settings }: ContactFormPr
                       onChange={handleInputChange}
                       placeholder="john@eliteplumbing.com"
                       className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 transition-all ${
-                        errors.email || emailValidation.type === 'error' || emailValidation.type === 'warning'
+                        errors.email
                           ? 'border-rose-400 focus:ring-rose-500/25 bg-rose-50/20'
-                          : emailValidation.type === 'success'
-                          ? 'border-emerald-400 focus:ring-emerald-500/25 bg-emerald-50/10'
                           : 'border-slate-200 focus:border-blue-500 focus:ring-blue-500/25'
                       }`}
                       id="input-email"
                     />
-                    {emailValidation.type !== 'idle' && (
-                      <motion.div 
-                        initial={{ opacity: 0, y: -5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`text-xs font-medium flex items-center gap-1.5 mt-1 ${
-                          emailValidation.type === 'success' 
-                            ? 'text-emerald-600' 
-                            : emailValidation.type === 'warning' 
-                            ? 'text-amber-600' 
-                            : 'text-rose-500'
-                        }`}
-                      >
-                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                          emailValidation.type === 'success' 
-                            ? 'bg-emerald-500' 
-                            : emailValidation.type === 'warning' 
-                            ? 'bg-amber-500 animate-pulse' 
-                            : 'bg-rose-500'
-                        }`} />
-                        <span>{emailValidation.message}</span>
-                      </motion.div>
-                    )}
-                    {errors.email && !emailValidation.message && (
+                    {errors.email && (
                       <p className="text-xs text-rose-500 font-bold">{errors.email}</p>
                     )}
                   </div>
