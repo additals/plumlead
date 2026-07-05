@@ -1,0 +1,29 @@
+# ==========================================
+# PlumLead Search Engine Optimization (SEO)
+# Robots Configuration
+# ==========================================
+
+# 1. Allow all search engines & crawlers
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# 2. Specifically allow AI search & LLM user-agents for Generative Engine Optimization (GEO)
+# (Enables ChatGPT, Gemini, Copilot, and Claude search grounding engines to list our site)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# 3. Path to Sitemap
+Sitemap: https://plumlead.com/sitemap.xml
