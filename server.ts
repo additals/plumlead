@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import nodemailer from "nodemailer";
 
@@ -9,6 +10,30 @@ async function startServer() {
 
   // Middleware for body parsing
   app.use(express.json());
+
+  // Direct Route Handlers for Search Engines & Verification
+  const serveStaticFile = (fileName: string, contentType?: string) => {
+    return (req: express.Request, res: express.Response) => {
+      const pathsToTry = [
+        path.join(process.cwd(), "dist", fileName),
+        path.join(process.cwd(), "public", fileName),
+      ];
+      
+      for (const filePath of pathsToTry) {
+        if (fs.existsSync(filePath)) {
+          if (contentType) {
+            res.setHeader("Content-Type", contentType);
+          }
+          return res.sendFile(filePath);
+        }
+      }
+      return res.status(404).send("File not found");
+    };
+  };
+
+  app.get("/robots.txt", serveStaticFile("robots.txt", "text/plain"));
+  app.get("/sitemap.xml", serveStaticFile("sitemap.xml", "application/xml"));
+  app.get("/google673cc197cab22499.html", serveStaticFile("google673cc197cab22499.html", "text/html"));
 
   // API Route: Send Lead notifications via Email/Webhook
   app.post("/api/send-lead", async (req, res) => {
